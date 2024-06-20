@@ -5,7 +5,7 @@ import 'package:electronic_equipment_store/models/h_customer_model.dart';
 import 'package:electronic_equipment_store/representation/screens/customer/customer_main_screen.dart';
 import 'package:electronic_equipment_store/representation/screens/login_or_register/forgot_password_screen.dart';
 import 'package:electronic_equipment_store/representation/screens/widgets/button_widget.dart';
-import 'package:electronic_equipment_store/services/api_service.dart';
+import 'package:electronic_equipment_store/services/user_api_service.dart';
 import 'package:electronic_equipment_store/services/auth_provider.dart';
 import 'package:electronic_equipment_store/services/cart_provider.dart';
 import 'package:electronic_equipment_store/services/user_api_service.dart';

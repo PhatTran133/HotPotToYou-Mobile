@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:electronic_equipment_store/core/constants/config_constans.dart';
-
 import 'package:http/http.dart' as http;
-
 
 class UserApiService{
   static Future<Map<String, dynamic>?> logIn(

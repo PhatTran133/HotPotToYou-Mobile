@@ -11,29 +11,6 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
 //Not Authorize
-
-  static Future<List<CategoryModel>?> getAllCategory() async {
-    final url = Uri.parse('$apiLink/api/Category/getall');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        Map<String, dynamic> jsonResponse = json.decode(response.body);
-        if (jsonResponse.containsKey('data')) {
-          List<dynamic> categoryList = jsonResponse['data'];
-          List<CategoryModel> categories =
-              categoryList.map((json) => CategoryModel.fromJson(json)).toList();
-          return categories;
-        } else {
-          throw Exception('Invalid JSON format: "data" field not found');
-        }
-      } else {
-        throw Exception('Failed to load all Category');
-      }
-    } catch (e) {
-      throw Exception('Error: $e');
-    }
-  }
-
   static Future<ProductModel> getProductByID(int productID) async {
     final url = Uri.parse('$apiLink/api/Product/getDetailsById/$productID');
     try {
