@@ -6,13 +6,13 @@ import 'package:http/http.dart' as http;
 class HotPotFlavorApiService{
 
   static Future<List<HotPotFlavorModel>?> getAllHotPotFlavors() async {
-    final url = Uri.parse('$apiLink/api/v1/hotpot-type');
+    final url = Uri.parse('$apiLink/api/v1/hotpot-flavor');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonResponse = json.decode(response.body);
-        if (jsonResponse.containsKey('data')) {
-          List<dynamic> hotPotFlavorList = jsonResponse['data'];
+        if (jsonResponse.containsKey('value')) {
+          List<dynamic> hotPotFlavorList = jsonResponse['value'];
           List<HotPotFlavorModel> categories =
           hotPotFlavorList.map((json) => HotPotFlavorModel.fromJson(json)).toList();
           return categories;

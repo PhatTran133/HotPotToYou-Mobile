@@ -7,8 +7,34 @@ import 'package:http/http.dart' as http;
 
 class HotpotApiService{
 
-  static Future<List<HotpotModel>?> getAllHotPots() async {
-    final url = Uri.parse('$apiLink/api/v1/hotpot?pageIndex=1&pageSize=10');
+  static Future<List<HotpotModel>?> getAllHotPots({
+    String? search,
+    String? sortBy,
+    double? fromPrice,
+    double? toPrice,
+    int? flavorID,
+    String? size,
+    int? typeID,
+    int? pageIndex,
+    int? pageSize,
+  }) async {
+    final baseUrl = '$apiLink/api/v1/hotpot';
+
+    // Construct query parameters based on provided inputs
+    final Map<String, String> queryParams = {};
+    if (search != null) queryParams['search'] = search;
+    if (sortBy != null) queryParams['sortBy'] = sortBy;
+    if (fromPrice != null) queryParams['fromPrice'] = fromPrice.toString();
+    if (toPrice != null) queryParams['toPrice'] = toPrice.toString();
+    if (flavorID != null) queryParams['flavorID'] = flavorID.toString();
+    if (size != null) queryParams['size'] = size;
+    if (typeID != null) queryParams['typeID'] = typeID.toString();
+    if (pageIndex != null) queryParams['pageIndex'] = pageIndex.toString();
+    if (pageSize != null) queryParams['pageSize'] = pageSize.toString();
+
+    // Construct the full URL with query parameters
+    final url = Uri.parse(baseUrl).replace(queryParameters: queryParams);
+  print(url);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -19,10 +45,10 @@ class HotpotApiService{
           productList.map((json) => HotpotModel.fromJson(json)).toList();
           return products;
         } else {
-          throw Exception('Invalid JSON format: "data" field not found');
+          throw Exception('Invalid JSON format: "value" field not found');
         }
       } else {
-        throw Exception('Failed to load all Product');
+        throw Exception('Failed to load all HotPot: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Error: $e');

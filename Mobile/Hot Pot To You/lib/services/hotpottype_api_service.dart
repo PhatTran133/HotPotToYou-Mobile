@@ -11,8 +11,8 @@ class HotPotTypeApiService{
       final response = await http.get(url);
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonResponse = json.decode(response.body);
-        if (jsonResponse.containsKey('data')) {
-          List<dynamic> hotPotTypeList = jsonResponse['data'];
+        if (jsonResponse.containsKey('value')) {
+          List<dynamic> hotPotTypeList = jsonResponse['value'];
           List<HotPotTypeModel> categories =
           hotPotTypeList.map((json) => HotPotTypeModel.fromJson(json)).toList();
           return categories;
