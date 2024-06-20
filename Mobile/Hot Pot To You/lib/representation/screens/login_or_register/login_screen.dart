@@ -8,6 +8,7 @@ import 'package:electronic_equipment_store/representation/screens/widgets/button
 import 'package:electronic_equipment_store/services/api_service.dart';
 import 'package:electronic_equipment_store/services/auth_provider.dart';
 import 'package:electronic_equipment_store/services/cart_provider.dart';
+import 'package:electronic_equipment_store/services/user_api_service.dart';
 import 'package:electronic_equipment_store/utils/dialog_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -56,13 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         );
         try {
-          final response = await ApiService.logIn(
+          final response = await UserApiService.logIn(
               emailController.text, passwordController.text);
           // ignore: use_build_context_synchronously
           Navigator.pop(context);
           if (response != null) {
             final responseCustomer =
-                await ApiService.getUser(emailController.text);
+                await UserApiService.getUser(emailController.text);
                 var tokenBox = Hive.box('tokenBox');
                 tokenBox.put('token',response['value']);
             if (responseCustomer != null) {

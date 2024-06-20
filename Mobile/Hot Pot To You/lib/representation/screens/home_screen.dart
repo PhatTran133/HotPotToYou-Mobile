@@ -12,6 +12,7 @@ import 'package:electronic_equipment_store/representation/screens/search_screen.
 import 'package:electronic_equipment_store/representation/screens/widgets/app_bar_main.dart';
 import 'package:electronic_equipment_store/representation/widgets/product_card.dart';
 import 'package:electronic_equipment_store/services/api_service.dart';
+import 'package:electronic_equipment_store/services/hotpot_api_service.dart';
 import 'package:electronic_equipment_store/utils/asset_helper.dart';
 import 'package:electronic_equipment_store/utils/image_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<List<HotpotModel>?> fetchProducts() async {
     switch (selectedProduct) {
       case 0:
-        return await ApiService.getAllProduct();
+        return await HotpotApiService.getAllHotPots();
     //   case 1:
     //     if (selectedCategory != null) {
     //       return await ApiService.getAllProductByCategoryID(
@@ -311,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
 
                                 HotpotModel hotpotModel = 
-                                await ApiService.getHotPotDetail(
+                                await HotpotApiService.getHotPotDetail(
                                   products[index].ID
 
                                 );
