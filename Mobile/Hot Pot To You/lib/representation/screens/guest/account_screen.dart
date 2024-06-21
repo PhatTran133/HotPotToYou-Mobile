@@ -36,7 +36,7 @@ class _AccountScreenState extends State<AccountScreen>
   Widget build(BuildContext context) {
     return AppBarMain(
       leading: ImageHelper.loadFromAsset(AssetHelper.imageLogo),
-      titleAppbar: "ELECTRICITY STORE",
+      titleAppbar: "Hot Pot To You",
       child: Scaffold(
         body: Column(
           children: [

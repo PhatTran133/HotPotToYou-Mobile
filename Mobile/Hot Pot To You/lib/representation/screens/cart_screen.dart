@@ -44,7 +44,7 @@ class _MainCartScreenState extends State<MainCartScreen> {
 
     return AppBarMain(
       leading: ImageHelper.loadFromAsset(AssetHelper.imageLogo),
-      titleAppbar: "ELECTRICITY STORE",
+      titleAppbar: "Hot Pot To You",
       child: Scaffold(
         body: authProvider.isLoggedIn ?
         cartItems.isEmpty
