@@ -22,11 +22,10 @@ import 'package:electronic_equipment_store/utils/image_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  @override     
+  @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
@@ -38,6 +37,39 @@ class _HomeScreenState extends State<HomeScreen> {
   HotPotTypeModel? hotPotTypeModel;
   String? selectedSize;
   HotPotFlavorModel? hotPotFlavorModel;
+  List<HotpotModel> products = [];
+  bool _isClearingFilters = false;
+
+  Future<void> _fetchAndSetProducts({
+    String? search,
+    String? sortBy,
+    double? fromPrice,
+    double? toPrice,
+    int? flavorID,
+    String? size,
+    int? typeID,
+    int? pageIndex,
+    int? pageSize,
+  }) async {
+    List<HotpotModel>? fetchedProducts = await fetchProducts(
+      search: search,
+      sortBy: sortBy,
+      fromPrice: fromPrice,
+      toPrice: toPrice,
+      flavorID: flavorID,
+      size: size,
+      typeID: typeID,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+    );
+
+    setState(() {
+      products = fetchedProducts ?? [];
+    });
+    _isClearingFilters = true; // Đặt cờ trước khi xóa bộ lọc
+    clearFilters();
+    _isClearingFilters = false; // Đặt lại cờ sau khi xóa bộ lọc
+  }
 
   Future<List<HotpotModel>?> fetchProducts({
     String? search,
@@ -79,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void clearFilters() {
+    if (_isClearingFilters) return; // Kiểm tra cờ trước khi xóa bộ lọc
     setState(() {
       hotPotTypeModel = null;
       hotPotFlavorModel = null;
@@ -108,6 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _focusNode = FocusNode();
     _loadCategories();
     selectedProduct = 0;
+    _fetchAndSetProducts(); // Gọi API khi khởi tạo
   }
 
   @override
@@ -449,21 +483,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     // Confirm button
                     Center(
                       child: ElevatedButton(
-                        onPressed: () async {
+                        onPressed: ()  {
                           // Close the modal bottom sheet
                           Navigator.pop(context);
 
                           // Call fetchProducts() with selected options
-                          await fetchProducts(
-                            flavorID: hotPotFlavorModel?.ID,
-                            size: selectedSize,
-                            typeID: hotPotTypeModel?.ID,
-                          );
-                          // clearFilters();
+                          _fetchAndSetProducts();
                         },
                         child: Text('Confirm'),
+
                       ),
                     ),
+
                   ],
                 ),
               ),
@@ -471,7 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         );
       },
-    );;
+    );
   }
   @override
   Widget build(BuildContext context) {
