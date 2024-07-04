@@ -4,6 +4,7 @@ import 'package:electronic_equipment_store/core/constants/textstyle_constants.da
 import 'package:electronic_equipment_store/models/category_model.dart';
 import 'package:electronic_equipment_store/models/feedback_model.dart';
 import 'package:electronic_equipment_store/models/h_hotpot_model.dart';
+import 'package:electronic_equipment_store/models/h_pot_model.dart';
 import 'package:electronic_equipment_store/models/hotpotflavor_model.dart';
 import 'package:electronic_equipment_store/models/hotpottype_model.dart';
 import 'package:electronic_equipment_store/models/product_detail_model.dart';
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? selectedSize;
   HotPotFlavorModel? hotPotFlavorModel;
   List<HotpotModel> products = [];
+  List<PotModel> pots = [];
   bool _isClearingFilters = false;
 
   Future<void> _fetchAndSetProducts({
@@ -564,6 +566,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                  Column(children: [
+                    ElevatedButton(onPressed: () {}, child: Text('Chọn Lẩu'))
+                  ],),
+                  Column(children: [
+                    ElevatedButton(onPressed: () {}, child: Text('Chọn Nồi'))
+                  ],),
+                  Column(children: [
+                    ElevatedButton(onPressed: () {}, child: Text('Chọn Dụng Cụ'))
+                  ],),
+                ],),
                 Row(
                   children: [
                     Text(

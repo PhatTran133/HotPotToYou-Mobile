@@ -35,41 +35,70 @@ class _MainAppState extends State<MainApp> {
           AccountScreen(),
         ],
       ),
-      bottomNavigationBar: SalomonBottomBar(
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        currentIndex: _currentIndex,
-        selectedItemColor: ColorPalette.primaryColor,
-        unselectedItemColor: ColorPalette.textHide,
-        margin: const EdgeInsets.symmetric(
-            horizontal: kMediumPadding24, vertical: kDefaultPadding16),
-        items: [
-          SalomonBottomBarItem(
-            title: const Text('Trang chủ'),
-            icon: const Icon(
-              FontAwesomeIcons.house,
-              size: kDefaultIconSize18,
-            ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Trang chủ',
           ),
-          SalomonBottomBarItem(
-            title: const Text('Giỏ hàng'),
+          BottomNavigationBarItem(
             icon: const Icon(
               FontAwesomeIcons.cartShopping,
               size: kDefaultIconSize18,
             ),
+            label: 'Giỏ hàng',
           ),
-          SalomonBottomBarItem(
-            title: const Text('Tài khoản'),
+          BottomNavigationBarItem(
             icon: const Icon(
               FontAwesomeIcons.solidUser,
               size: kDefaultIconSize18,
             ),
+            label: 'Tài khoản',
           ),
         ],
-      ),
+         currentIndex: _currentIndex,
+        selectedItemColor: ColorPalette.primaryColor,
+       onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      // bottomNavigationBar: SalomonBottomBar(
+      //   onTap: (index) {
+      //     setState(() {
+      //       _currentIndex = index;
+      //     });
+      //   },
+      //   currentIndex: _currentIndex,
+      //   selectedItemColor: ColorPalette.primaryColor,
+      //   unselectedItemColor: ColorPalette.textHide,
+      //   margin: const EdgeInsets.symmetric(
+      //       horizontal: kMediumPadding24, vertical: kDefaultPadding16),
+      //   items: [
+      //     SalomonBottomBarItem(
+      //       title: const Text('Trang chủ'),
+      //       icon: const Icon(
+      //         FontAwesomeIcons.house,
+      //         size: kDefaultIconSize18,
+      //       ),
+      //     ),
+      //     SalomonBottomBarItem(
+      //       title: const Text('Giỏ hàng'),
+      //       icon: const Icon(
+      //         FontAwesomeIcons.cartShopping,
+      //         size: kDefaultIconSize18,
+      //       ),
+      //     ),
+      //     SalomonBottomBarItem(
+      //       title: const Text('Tài khoản'),
+      //       icon: const Icon(
+      //         FontAwesomeIcons.solidUser,
+      //         size: kDefaultIconSize18,
+      //       ),
+      //     ),
+      //   ],
+      // ),
+    )
     );
   }
 }
