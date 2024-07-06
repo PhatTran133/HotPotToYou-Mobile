@@ -76,7 +76,6 @@ class _PotScreenState extends State<PotScreen> {
       case 0:
         try {
           return await HotpotApiService.getAllPots(
-            search: search,
           );
         } catch (e) {
           throw Exception('Failed to fetch products: $e');
@@ -84,7 +83,7 @@ class _PotScreenState extends State<PotScreen> {
         case 2:
         try {
           return await HotpotApiService.getAllPots(
-            search: search,
+            search: searchTerm,
           );
         } catch (e) {
           throw Exception('Failed to fetch products: $e');
@@ -134,6 +133,7 @@ class _PotScreenState extends State<PotScreen> {
     if (result != null && result is String) {
       setState(() {
         searchTerm = result;
+        print('đâ' +result);
         selectedProduct = 2;
       });
     }

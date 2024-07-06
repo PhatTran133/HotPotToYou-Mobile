@@ -64,7 +64,7 @@ static Future<List<PotModel>?> getAllPots({
 
     // Construct query parameters based on provided inputs
     final Map<String, String> queryParams = {};
-    if (search != null) queryParams['search'] = search;
+    if (search != null) queryParams['name'] = search;
 
     // Construct the full URL with query parameters
     final url = Uri.parse(baseUrl).replace(queryParameters: queryParams);

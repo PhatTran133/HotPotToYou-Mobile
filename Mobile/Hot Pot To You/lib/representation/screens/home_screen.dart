@@ -103,6 +103,22 @@ class _HomeScreenState extends State<HomeScreen> {
         } catch (e) {
           throw Exception('Failed to fetch products: $e');
         }
+        case 2:
+        try {
+          return await HotpotApiService.getAllHotPots(
+            search: searchTerm,
+            sortBy: sortBy,
+            fromPrice: fromPrice,
+            toPrice: toPrice,
+            flavorID: hotPotFlavorModel?.ID,
+            size: selectedSize,
+            typeID: hotPotTypeModel?.ID,
+            pageIndex: pageIndex,
+            pageSize: pageSize,
+          );
+        } catch (e) {
+          throw Exception('Failed to fetch products: $e');
+        }
 // Uncomment and add cases for other product fetching scenarios if needed
 // case 1:
 // if (selectedCategory != null) {

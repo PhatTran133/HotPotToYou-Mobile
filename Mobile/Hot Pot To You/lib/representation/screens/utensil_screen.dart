@@ -51,11 +51,18 @@ class _UtensilScreenState extends State<UtensilScreen> {
   Future<List<UtensilModel>?> fetchProducts({
     String? search,
   }) async {
-    // switch (selectedProduct) {
-     // case 2:
+     switch (selectedProduct) {
+      case 0:
         try {
           return await HotpotApiService.getAllUtensil(
-            search: search,
+          );
+        } catch (e) {
+          throw Exception('Failed to fetch products: $e');
+        }
+        case 2:
+        try {
+          return await HotpotApiService.getAllUtensil(
+            search: searchTerm,
           );
         } catch (e) {
           throw Exception('Failed to fetch products: $e');
@@ -67,8 +74,8 @@ class _UtensilScreenState extends State<UtensilScreen> {
 // }
 // case 2:
 // return await ApiService.getAllProductByProductName(searchTerm);
-//}
-    // return null;
+}
+     return null;
   }
 
   void clearFilters() {
