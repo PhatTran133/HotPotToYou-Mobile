@@ -6,6 +6,7 @@ import 'package:electronic_equipment_store/models/h_hotpot_model.dart';
 import 'package:electronic_equipment_store/models/product_detail_model.dart';
 import 'package:electronic_equipment_store/models/product_image_model.dart';
 import 'package:electronic_equipment_store/models/product_model.dart';
+import 'package:electronic_equipment_store/utils/asset_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -213,8 +214,8 @@ class ApiService {
   }
 
   static Future<int> createAccount(
-      String name, String phone, String email, String password) async {
-    const String apiUrl = '$apiLink/api/User/create';
+      String name, String phone, String email, String password, String yearOfBirth, String gender, String address, ) async {
+    const String apiUrl = '$apiLink/api/v1/customer/register';
     final http.Response response = await http.post(
       Uri.parse(apiUrl),
       headers: <String, String>{
@@ -225,9 +226,11 @@ class ApiService {
         'email': email,
         'password': password,
         'name': name,
+        'gender' : gender,
+        'address' : address,
         'phone': phone,
-        'status': true,
-        'roleId': 2
+        'yearOfBirth': yearOfBirth,
+        'avatarUrl': AssetHelper.imageAvatarDefault,
       }),
     );    
     if (response.statusCode == 200) {

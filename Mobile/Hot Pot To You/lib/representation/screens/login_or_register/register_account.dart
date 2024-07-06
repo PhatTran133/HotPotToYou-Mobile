@@ -3,6 +3,7 @@
 import 'package:electronic_equipment_store/core/constants/my_textformfield.dart';
 import 'package:electronic_equipment_store/representation/screens/widgets/button_widget.dart';
 import 'package:electronic_equipment_store/services/api_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../core/constants/color_constants.dart';
@@ -24,6 +25,9 @@ class _RegisterAccountState extends State<RegisterAccount> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
+  String? _selectedGender;
+  TextEditingController addressController = TextEditingController();
 
   bool _showPass = false;
   bool _showConfirmPass = false;
@@ -49,7 +53,15 @@ class _RegisterAccountState extends State<RegisterAccount> {
     } else if (passwordController.text != confirmPasswordController.text) {
       showCustomDialog(
           context, 'Lỗi', 'Xác nhận mật khẩu không trùng khớp.', true);
-    } else {
+    } else if ( _dateController.text.isEmpty){
+      showCustomDialog(context, 'Lỗi', 'Bạn chưa chọn ngày sinh', true);
+      }else if ( _selectedGender == null){
+      showCustomDialog(context, 'Lỗi', 'Bạn chưa chọn giới tính', true);
+      }else if ( addressController.text.isEmpty){
+      showCustomDialog(context, 'Lỗi', 'Bạn chưa điền địa chỉ', true);
+      }else
+
+      {
       showDialog(
         context: context,
         builder: (context) {
@@ -66,6 +78,9 @@ class _RegisterAccountState extends State<RegisterAccount> {
             phoneController.text,
             emailController.text,           
             passwordController.text,
+            _dateController.text,
+            _selectedGender!,
+            addressController.text,
           );
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
@@ -100,6 +115,21 @@ class _RegisterAccountState extends State<RegisterAccount> {
       _showConfirmPass = !_showConfirmPass;
     });
   }
+  
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        _dateController.text = "${picked.toLocal()}".split(' ')[0];
+      });
+    }
+  }
+
 
   String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
@@ -265,6 +295,61 @@ class _RegisterAccountState extends State<RegisterAccount> {
                   size: kDefaultIconSize18,
                 ),
               ),
+              SizedBox(height: 10,),
+              MyTextFormField(
+                controller: addressController,
+                hintText: 'Address',
+                obscureText: false,
+               // validator: validateAddress,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                prefixIcon: const Icon(
+                  FontAwesomeIcons.solidAddressBook,
+                  size: kDefaultIconSize18,
+                ),
+              ),
+              SizedBox(height: 10,),
+              MyTextFormField(controller: _dateController, hintText: "Ngày Sinh" , prefixIcon: Icon(Icons.calendar_today), onTap: () => _selectDate(context), readOnly: true,  ),   
+              SizedBox(height: 10),     
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+        hintText: "Giới Tính",
+        prefixIcon: Icon(Icons.person),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(kDefaultCircle14),
+          borderSide: const BorderSide(color: ColorPalette.textHide),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: ColorPalette.primaryColor),
+          borderRadius: BorderRadius.circular(kDefaultCircle14),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(kDefaultCircle14),
+          borderSide: const BorderSide(color: Colors.redAccent),
+        ),
+        errorStyle: TextStyles.defaultStyle.setColor(Colors.redAccent),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(kDefaultCircle14),
+          borderSide: const BorderSide(color: Colors.redAccent),
+        ),
+        fillColor: Colors.white,
+        filled: true,
+        hintStyle: TextStyles.defaultStyle.setColor(ColorPalette.textHide),
+      ),
+              
+              value: _selectedGender,
+              items: <String>['Nam', 'Nữ', 'Khác']
+                  .map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedGender = newValue;
+                });
+              },
+            ),
               const SizedBox(height: 25),
               ButtonWidget(
                 title: 'Tiếp tục',

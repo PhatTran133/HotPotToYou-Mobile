@@ -14,6 +14,8 @@ class MyTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? keyboardType;
   final AutovalidateMode? autovalidateMode;
+  final void Function()? onTap;
+  final bool? readOnly;
 
   const MyTextFormField({
     super.key,
@@ -26,6 +28,8 @@ class MyTextFormField extends StatelessWidget {
     this.keyboardType,
     this.autovalidateMode,
     this.onChanged,
+    this.onTap,
+    this.readOnly,
   });
 
   @override
@@ -62,6 +66,8 @@ class MyTextFormField extends StatelessWidget {
         filled: true,
         hintStyle: TextStyles.defaultStyle.setColor(ColorPalette.textHide),
       ),
+      onTap: onTap,
+      readOnly: readOnly?? false
     );
   }
 }

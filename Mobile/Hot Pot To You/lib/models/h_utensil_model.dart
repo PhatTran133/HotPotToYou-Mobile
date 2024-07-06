@@ -1,7 +1,7 @@
 
 
 
-class PotModel{
+class UtensilModel{
    int ID ;
  String Name ;
  String material ;
@@ -11,7 +11,7 @@ class PotModel{
  String Type ;
  
 
- PotModel({
+ UtensilModel({
     required this.ID,
     required this.Name,
     required this.material,
@@ -22,8 +22,8 @@ class PotModel{
 
 
  });
- factory PotModel.fromJson(Map<String, dynamic> json) {
-    return PotModel(
+ factory UtensilModel.fromJson(Map<String, dynamic> json) {
+    return UtensilModel(
       ID: json['id'],
       Name: json['name'],
       material: json['material'],

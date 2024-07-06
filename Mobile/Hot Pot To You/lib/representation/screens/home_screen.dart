@@ -10,8 +10,10 @@ import 'package:electronic_equipment_store/models/hotpottype_model.dart';
 import 'package:electronic_equipment_store/models/product_detail_model.dart';
 import 'package:electronic_equipment_store/models/product_image_model.dart';
 import 'package:electronic_equipment_store/models/product_model.dart';
+import 'package:electronic_equipment_store/representation/screens/pot_screen.dart';
 import 'package:electronic_equipment_store/representation/screens/product_detail/product_detail.dart';
 import 'package:electronic_equipment_store/representation/screens/search_screen.dart';
+import 'package:electronic_equipment_store/representation/screens/utensil_screen.dart';
 import 'package:electronic_equipment_store/representation/screens/widgets/app_bar_main.dart';
 import 'package:electronic_equipment_store/representation/widgets/product_card.dart';
 import 'package:electronic_equipment_store/services/api_service.dart';
@@ -41,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<HotpotModel> products = [];
   List<PotModel> pots = [];
   bool _isClearingFilters = false;
-
+  
   Future<void> _fetchAndSetProducts({
     String? search,
     String? sortBy,
@@ -573,10 +575,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ElevatedButton(onPressed: () {}, child: Text('Chọn Lẩu'))
                   ],),
                   Column(children: [
-                    ElevatedButton(onPressed: () {}, child: Text('Chọn Nồi'))
+                    ElevatedButton(onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> PotScreen()));
+                    }, child: Text('Chọn Nồi'))
                   ],),
                   Column(children: [
-                    ElevatedButton(onPressed: () {}, child: Text('Chọn Dụng Cụ'))
+                    ElevatedButton(onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> UtensilScreen()));
+                    }, child: Text('Chọn Dụng Cụ'))
                   ],),
                 ],),
                 Row(
