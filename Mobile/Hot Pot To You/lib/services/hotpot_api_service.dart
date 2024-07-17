@@ -6,9 +6,7 @@ import 'package:electronic_equipment_store/models/h_utensil_model.dart';
 
 import 'package:http/http.dart' as http;
 
-
-class HotpotApiService{
-
+class HotpotApiService {
   static Future<List<HotpotModel>?> getAllHotPots({
     String? search,
     String? sortBy,
@@ -36,7 +34,7 @@ class HotpotApiService{
 
     // Construct the full URL with query parameters
     final url = Uri.parse(baseUrl).replace(queryParameters: queryParams);
-  print(url);
+    print(url);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -44,7 +42,7 @@ class HotpotApiService{
         if (jsonResponse.containsKey('value')) {
           List<dynamic> productList = jsonResponse['value'];
           List<HotpotModel> products =
-          productList.map((json) => HotpotModel.fromJson(json)).toList();
+              productList.map((json) => HotpotModel.fromJson(json)).toList();
           return products;
         } else {
           throw Exception('Invalid JSON format: "value" field not found');
@@ -57,7 +55,7 @@ class HotpotApiService{
     }
   }
 
-static Future<List<PotModel>?> getAllPots({
+  static Future<List<PotModel>?> getAllPots({
     String? search,
   }) async {
     final baseUrl = '$apiLink/api/v1/pot';
@@ -68,7 +66,7 @@ static Future<List<PotModel>?> getAllPots({
 
     // Construct the full URL with query parameters
     final url = Uri.parse(baseUrl).replace(queryParameters: queryParams);
-  print(url);
+    print(url);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -76,7 +74,7 @@ static Future<List<PotModel>?> getAllPots({
         if (jsonResponse.containsKey('value')) {
           List<dynamic> productList = jsonResponse['value'];
           List<PotModel> products =
-          productList.map((json) => PotModel.fromJson(json)).toList();
+              productList.map((json) => PotModel.fromJson(json)).toList();
           return products;
         } else {
           throw Exception('Invalid JSON format: "value" field not found');
@@ -88,6 +86,7 @@ static Future<List<PotModel>?> getAllPots({
       throw Exception('Error: $e');
     }
   }
+
   static Future<List<UtensilModel>?> getAllUtensil({
     String? search,
   }) async {
@@ -99,7 +98,7 @@ static Future<List<PotModel>?> getAllPots({
 
     // Construct the full URL with query parameters
     final url = Uri.parse(baseUrl).replace(queryParameters: queryParams);
-  print(url);
+    print(url);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -107,7 +106,7 @@ static Future<List<PotModel>?> getAllPots({
         if (jsonResponse.containsKey('value')) {
           List<dynamic> productList = jsonResponse['value'];
           List<UtensilModel> products =
-          productList.map((json) => UtensilModel.fromJson(json)).toList();
+              productList.map((json) => UtensilModel.fromJson(json)).toList();
           return products;
         } else {
           throw Exception('Invalid JSON format: "value" field not found');
@@ -119,15 +118,42 @@ static Future<List<PotModel>?> getAllPots({
       throw Exception('Error: $e');
     }
   }
-  static Future<HotpotModel> getHotPotDetail (int ID) async{
+
+  static Future<HotpotModel> getHotPotDetail(int ID) async {
     final url = Uri.parse('$apiLink/api/v1/hotpot/get-hotpot-by-id?id=$ID');
     final reponse = await http.get(url);
-    if (reponse.statusCode == 200){
+    if (reponse.statusCode == 200) {
       Map<String, dynamic> data = json.decode(reponse.body);
-      Map<String , dynamic> hotpotData = data['value'];
+      Map<String, dynamic> hotpotData = data['value'];
       HotpotModel hotpotModel = HotpotModel.fromJson(hotpotData);
       return hotpotModel;
-    } else{
+    } else {
+      throw Exception('lấy thông tin lẩu không thành công');
+    }
+  }
+
+  static Future<PotModel> getPotDetail(int ID) async {
+    final url = Uri.parse('$apiLink/api/v1/pot/get-pot-by-id?id=$ID');
+    final reponse = await http.get(url);
+    if (reponse.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(reponse.body);
+      Map<String, dynamic> potData = data['value'];
+      PotModel potModel = PotModel.fromJson(potData);
+      return potModel;
+    } else {
+      throw Exception('lấy thông tin lẩu không thành công');
+    }
+  }
+
+  static Future<UtensilModel> getUtensilDetail(int ID) async {
+    final url = Uri.parse('$apiLink/api/v1/utensil/get-utensil-by-id?id=$ID');
+    final reponse = await http.get(url);
+    if (reponse.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(reponse.body);
+      Map<String, dynamic> potData = data['value'];
+      UtensilModel utensilModel = UtensilModel.fromJson(potData);
+      return utensilModel;
+    } else {
       throw Exception('lấy thông tin lẩu không thành công');
     }
   }

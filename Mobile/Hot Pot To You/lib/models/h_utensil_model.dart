@@ -1,17 +1,15 @@
+class UtensilModel {
+  int ID;
+  String Name;
+  String material;
+  String Size;
+  int quantity;
+  double Price;
+  String Type;
+  int? quantityUserWantBuy;
+  String ImageUrl;
 
-
-
-class UtensilModel{
-   int ID ;
- String Name ;
- String material ;
- String Size ;
- int quantity ;
- double Price ; 
- String Type ;
- 
-
- UtensilModel({
+  UtensilModel({
     required this.ID,
     required this.Name,
     required this.material,
@@ -19,10 +17,10 @@ class UtensilModel{
     required this.quantity,
     required this.Price,
     required this.Type,
-
-
- });
- factory UtensilModel.fromJson(Map<String, dynamic> json) {
+    required this.ImageUrl,
+    this.quantityUserWantBuy,
+  });
+  factory UtensilModel.fromJson(Map<String, dynamic> json) {
     return UtensilModel(
       ID: json['id'],
       Name: json['name'],
@@ -31,6 +29,7 @@ class UtensilModel{
       quantity: json['quantity'],
       Price: json['price'],
       Type: json['type'],
+      ImageUrl: json['imageUrl']
     );
   }
 }

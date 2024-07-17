@@ -44,11 +44,11 @@ class _ProductCardState extends State<PotCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //img
-                // AspectRatio(
-                //   aspectRatio: 13 / 9,
-                //   child: Image.network(widget.product.ImageUrl,
-                //       fit: BoxFit.cover),
-                // ),
+                AspectRatio(
+                  aspectRatio: 13 / 9,
+                  child: Image.network(widget.product.Url,
+                      fit: BoxFit.cover),
+                ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
