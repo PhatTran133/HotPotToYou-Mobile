@@ -20,5 +20,17 @@ class OrderBuyModel {
     this.paymentName,
   });
 
-  
+  factory OrderBuyModel.fromJson(Map<String, dynamic> json) {
+    return OrderBuyModel(
+      orderBuyID: json['orderId'],
+      total: json['totalPrice'].toDouble(),
+      status: json['status'],
+      paymentName: json['paymentName'],
+      customerName: json['nameCustomer'],
+      customerAddress: json['addressCustomer'],
+      customerPhone: json['phoneCustomer'],      
+      dateOrder: DateTime.parse(json['orderDate']),
+      
+    );
+  }
 }
