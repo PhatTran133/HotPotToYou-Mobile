@@ -678,11 +678,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     CupertinoPageRoute(
                                       builder: (context) => ProductDetail(
                                           hotpotModel: hotpotModel
-                                        productImageModel: productImages,
-                                        productModel: productModel,
-                                        productDetails: productDetail,
-                                        feedbackList: feedbackProduct,
-                                        categoryModel: categoryModel,
+                                        // productImageModel: productImages,
+                                        // productModel: productModel,
+                                        // productDetails: productDetail,
+                                        // feedbackList: feedbackProduct,
+                                        // categoryModel: categoryModel,
                                       ),
                                     ),
                                   );
