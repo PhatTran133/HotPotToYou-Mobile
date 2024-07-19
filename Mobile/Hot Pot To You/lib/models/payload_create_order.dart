@@ -53,8 +53,9 @@ class PayloadCreateOrder {
         adress: json["adress"],
         totalPrice: json["totalPrice"],
         paymentId: json["paymentID"],
-        
-            
+        items: json["items"] == null
+            ? []
+            : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -63,7 +64,7 @@ class PayloadCreateOrder {
         "adress": adress,
         "totalPrice": totalPrice,
         "paymentID": paymentId,
-        
+        "items": items == null ? [] : (items!.map((x) => x.toJson())).toList(),
       };
 }
 
@@ -97,5 +98,19 @@ class Item {
         isPackage: isPackage ?? this.isPackage,
       );
 
-  
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
+        type: json["type"],
+        id: json["id"],
+        quantity: json["quantity"],
+        total: json["total"],
+        isPackage: json["isPackage"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "id": id,
+        "quantity": quantity,
+        "total": total,
+        "isPackage": isPackage,
+      };
 }
