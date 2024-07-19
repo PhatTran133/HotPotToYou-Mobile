@@ -47,5 +47,16 @@ class ProductModel {
         categoryID: json['categoryID']);
   }
 
+  factory ProductModel.fromJsonGetCartByUserID(Map<String, dynamic> json) {
+    return ProductModel(
+      productID: json['productId'],
+      productName: json['productName'],
+      productImage: json['imageUrl'],
+      quantityUserWantBuy: json['quantity'],
+      price: json['price'],
+      quantity: 10000,
+    );
+  }
+
   
 }
