@@ -70,5 +70,13 @@ class ProductModel {
     );
   }
 
-  
+  Map<String, dynamic> toJsonCreateOrder() {
+    DateTime expiredWarranty = DateTime.now();
+    if(warrantyPeriod != null) expiredWarranty = DateExtension.addMonths(expiredWarranty, warrantyPeriod!);
+    return {
+      'productId': productID,
+      'quantity': quantityUserWantBuy,
+      'expiredWarranty': expiredWarranty.toIso8601String(),
+    };
+  }
 }
