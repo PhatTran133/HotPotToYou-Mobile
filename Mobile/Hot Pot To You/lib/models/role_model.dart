@@ -14,5 +14,10 @@ class RoleModel {
     );
   }
 
-  
+  Map<dynamic, dynamic> toJson() {
+    return {
+      'roleID': roleID,
+      'roleName': roleName,
+    };
+  }
 }
