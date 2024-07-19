@@ -58,5 +58,17 @@ class ProductModel {
     );
   }
 
+  factory ProductModel.fromJsonGetOrderID(Map<String, dynamic> json) {
+    return ProductModel(
+      productID: json['product']['id'],
+      productName: json['product']['name'],
+      productImage: json['product']['imageUrl'],
+      quantityUserWantBuy: json['quantity'],
+      price: json['price'],
+      expiredWarranty: DateTime.parse(json['expiredWarranty']),
+      quantity: 10000,
+    );
+  }
+
   
 }
